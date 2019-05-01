@@ -430,11 +430,9 @@ RCT_EXPORT_MODULE()
     // Emit event to the queue (in order to store the completion handler). if JS thread is ready, post it also to the notification center (to the bridge).
     [[RNNotificationsBridgeQueue sharedInstance] postAction:info withCompletionKey:completionKey andCompletionHandler:completionHandler];
 
-    if ([RNNotificationsBridgeQueue sharedInstance].jsIsReady == YES) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:RNNotificationActionTriggered
-                                                            object:self
-                                                          userInfo:info];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:RNNotificationActionTriggered
+                                                        object:self
+                                                        userInfo:info];
 }
 
 + (void)registerPushKit
